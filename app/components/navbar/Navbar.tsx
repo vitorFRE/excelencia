@@ -3,8 +3,13 @@ import Logo from './Logo'
 import Navitems from './Navitems'
 import Topbar from './Topbar'
 import UserMenu from './UserMenu'
+import { SafeUser } from '@/app/types'
 
-const Navbar = () => {
+interface NavBarProps {
+	currentUser?: SafeUser | null
+}
+
+const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
 	return (
 		<div className='fixed w-full bg-white z-10'>
 			<Topbar phoneNumber='(00) 87129-7143' />
@@ -13,7 +18,7 @@ const Navbar = () => {
 					<div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
 						<Logo />
 						<Navitems />
-						<UserMenu />
+						<UserMenu currentUser={currentUser} />
 					</div>
 				</Container>
 			</header>
