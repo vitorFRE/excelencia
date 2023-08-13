@@ -4,12 +4,17 @@ import { useCallback, useState } from 'react'
 import Avatar from '../Avatar'
 import { useRouter } from 'next/navigation'
 import MenuItem from './MenuItem'
+import useRegisterModal from '@/app/hooks/useRegisterModal'
+import { SafeUser } from '@/app/types'
 
-const UserMenu = () => {
+interface UserMenuProps {
+	currentUser?: SafeUser | null
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+	const registerModal = useRegisterModal()
 	const [isOpen, setIsOpen] = useState(false)
 	const router = useRouter()
-
-	const currentUser = true
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen((value) => !value)
@@ -43,7 +48,7 @@ const UserMenu = () => {
 								<MenuItem onClick={() => router.push('/')} label='Contato' />
 								<hr />
 								<MenuItem onClick={() => {}} label='Login' />
-								<MenuItem onClick={() => {}} label='Cadastrar' />
+								<MenuItem onClick={registerModal.onOpen} label='Cadastrar' />
 							</>
 						)}
 					</div>
