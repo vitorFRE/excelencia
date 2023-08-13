@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './components/navbar/Navbar'
 import getCurrentUser from './actions/getCurrentUser'
+import RegisterModal from './components/modals/RegisterModal'
+import ToasterProvider from './providers/ToasterProvider'
+import LoginModal from './components/modals/LoginModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +19,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	return (
 		<html lang='pt-br'>
 			<body className={inter.className}>
+				<ToasterProvider />
+				<LoginModal />
+				<RegisterModal />
 				<Navbar currentUser={currentUser} />
 				<div className='pb-20 pt-28'>{children}</div>
 			</body>
