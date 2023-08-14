@@ -10,6 +10,9 @@ const config: Config = {
 		extend: {
 			colors: {
 				primary: '#004AAD'
+			},
+			backgroundImage: {
+				'hero-bg': "url('/images/BG.jpg')"
 			}
 		}
 	},

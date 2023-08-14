@@ -1,3 +1,12 @@
+import Button from './components/Button'
+import Hero from './components/home/Hero'
+import ProjectsHome from './components/home/ProjectsHome'
+
 export default function Home() {
-	return <div className='pt-16'>oi</div>
+	return (
+		<main className='pt-4'>
+			<Hero />
+			<ProjectsHome />
+		</main>
+	)
 }
