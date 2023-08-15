@@ -11,7 +11,7 @@ interface NavBarProps {
 
 const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
 	return (
-		<div className='fixed w-full bg-white z-10'>
+		<div className=' w-full bg-white z-20'>
 			<Topbar phoneNumber='(00) 87129-7143' />
 			<header className='py-4 border-b-[1px]'>
 				<Container>

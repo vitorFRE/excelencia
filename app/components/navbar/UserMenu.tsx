@@ -8,6 +8,7 @@ import { signOut } from 'next-auth/react'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import { SafeUser } from '@/app/types'
 import useLoginModal from '@/app/hooks/useLoginModal'
+import useAddPropertyModal from '@/app/hooks/useAddPropertyModal'
 
 interface UserMenuProps {
 	currentUser?: SafeUser | null
@@ -16,6 +17,7 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 	const registerModal = useRegisterModal()
 	const loginModal = useLoginModal()
+	const addPropertyModal = useAddPropertyModal()
 	const [isOpen, setIsOpen] = useState(false)
 	const router = useRouter()
 
@@ -31,7 +33,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 			</div>
 
 			{isOpen && (
-				<div className='absolute rounded-xl shadow-md w-[40vw] md:w-[15vw] bg-white overflow-hidden right-0 top-14 text-sm'>
+				<div className='absolute rounded-xl shadow-md w-[40vw] md:w-[15vw] bg-white overflow-hidden right-0 top-14 text-sm z-50'>
 					<div className='flex flex-col cursor-pointer'>
 						{currentUser ? (
 							<>
@@ -43,6 +45,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 									<>
 										<hr />
 										<MenuItem onClick={() => router.push('/')} label='Propriedades' />
+										<MenuItem onClick={addPropertyModal.onOpen} label='Adicionar' />
 									</>
 								) : null}
 								<hr />

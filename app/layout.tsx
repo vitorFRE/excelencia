@@ -6,6 +6,7 @@ import getCurrentUser from './actions/getCurrentUser'
 import RegisterModal from './components/modals/RegisterModal'
 import ToasterProvider from './providers/ToasterProvider'
 import LoginModal from './components/modals/LoginModal'
+import AddPropertyModal from './components/modals/AddPropertyModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,10 +21,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 		<html lang='pt-br'>
 			<body className={inter.className}>
 				<ToasterProvider />
+				<AddPropertyModal />
 				<LoginModal />
 				<RegisterModal />
 				<Navbar currentUser={currentUser} />
-				<div className='pb-20 pt-28'>{children}</div>
+				<div className='pb-20'>{children}</div>
 			</body>
 		</html>
 	)
