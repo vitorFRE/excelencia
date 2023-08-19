@@ -5,7 +5,39 @@ export interface IPropertysParams {
 	orderBy?: 'asc' | 'desc'
 }
 
-export default async function getPropertys(params: IPropertysParams) {
+interface Property {
+	id: string
+	title: string
+	description: string
+	price: number
+	area: number
+	buildingArea: number
+	bedroomCount: number
+	bathroomCount: number
+	city: string
+	state: string
+	roomCount: number
+	locationValue: string
+	createdAt: Date
+	updatedAt: Date
+	latitude?: number
+	longitude?: number
+	images?: PropertyImage[]
+}
+
+interface PropertyImage {
+	id: string
+	property: Property
+	propertyId: string
+	imageUrl: string
+	imageId: string
+	createdAt: Date
+	updatedAt: Date
+}
+
+export default async function getPropertys(
+	params: IPropertysParams
+): Promise<Property[]> {
 	try {
 		const { take, orderBy = 'desc' } = params
 
