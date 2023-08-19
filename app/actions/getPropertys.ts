@@ -5,7 +5,7 @@ export interface IPropertysParams {
 	orderBy?: 'asc' | 'desc'
 }
 
-interface Property {
+export interface Property {
 	id: string
 	title: string
 	description: string

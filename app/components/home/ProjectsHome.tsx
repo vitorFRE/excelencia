@@ -6,7 +6,7 @@ import PropertyCard from '../property/PropertyCard'
 import EmptyState from '../EmptyState'
 
 const ProjectsHome = async () => {
-	const casas = await getPropertys({ take: 6 })
+	const listing = await getPropertys({ take: 6 })
 	return (
 		<Container>
 			<div className='pt-[75px] flex flex-col gap-2 md:gap-0 md:flex-row justify-between'>
@@ -19,11 +19,11 @@ const ProjectsHome = async () => {
 				</Link>
 			</div>
 			<>
-				{casas.length === 0 ? (
+				{listing.length === 0 ? (
 					<EmptyState subtitle='Parece que houve um erro' />
 				) : (
 					<div className='pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-8'>
-						{casas.map((property) => (
+						{listing.map((property) => (
 							<PropertyCard
 								image={
 									property.images && property.images[0] ? property.images[0].imageUrl : ''
