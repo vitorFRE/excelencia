@@ -3,12 +3,14 @@ import Container from '../components/Container'
 import Heading from '../components/Heading'
 import PropertyCard from '../components/property/PropertyCard'
 import { Property } from '../actions/getPropertys'
+import { SafeUser } from '../types'
 
 interface PropertiesCleintProps {
 	listings: Property[]
+	currentUser?: SafeUser | null
 }
 
-const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings }) => {
+const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings, currentUser }) => {
 	return (
 		<Container>
 			<div className='pt-[75px]'>
@@ -33,6 +35,8 @@ const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings }) => {
 								title={property.title}
 								locationValue={property.locationValue}
 								description={property.description}
+								id={property.id}
+								currentUser={currentUser}
 							/>
 						))}
 					</div>

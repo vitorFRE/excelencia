@@ -1,4 +1,5 @@
 import Container from '../Container'
+import FavoritesHeartCount from './FavoritesHeartCount'
 import Logo from './Logo'
 import Navitems from './Navitems'
 import Topbar from './Topbar'
@@ -18,7 +19,10 @@ const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
 					<div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
 						<Logo />
 						<Navitems />
-						<UserMenu currentUser={currentUser} />
+						<div className='flex gap-3 items-center'>
+							<FavoritesHeartCount currentUser={currentUser} />
+							<UserMenu currentUser={currentUser} />
+						</div>
 					</div>
 				</Container>
 			</header>

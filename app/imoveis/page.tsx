@@ -1,9 +1,11 @@
+import getCurrentUser from '../actions/getCurrentUser'
 import getPropertys, { Property } from '../actions/getPropertys'
 import EmptyState from '../components/EmptyState'
 import PropertiesClient from './PropertiesClient'
 
 const PropertiesPage = async () => {
 	const listings: Property[] = await getPropertys({})
+	const currentUser = await getCurrentUser()
 
 	if (listings.length === 0) {
 		return (
@@ -14,7 +16,7 @@ const PropertiesPage = async () => {
 		)
 	}
 
-	return <PropertiesClient listings={listings} />
+	return <PropertiesClient listings={listings} currentUser={currentUser} />
 }
 
 export default PropertiesPage

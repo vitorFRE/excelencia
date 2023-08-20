@@ -9,6 +9,10 @@ export async function POST(request: Request) {
 		return NextResponse.error()
 	}
 
+	if (currentUser.role !== 'ADMIN') {
+		return NextResponse.error()
+	}
+
 	const body = await request.json()
 	const {
 		title,

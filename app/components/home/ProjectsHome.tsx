@@ -4,9 +4,11 @@ import Heading from '../Heading'
 import Link from 'next/link'
 import PropertyCard from '../property/PropertyCard'
 import EmptyState from '../EmptyState'
+import getCurrentUser from '@/app/actions/getCurrentUser'
 
 const ProjectsHome = async () => {
 	const listing = await getPropertys({ take: 6 })
+	const currentUser = await getCurrentUser()
 	return (
 		<Container>
 			<div className='pt-[75px] flex flex-col gap-2 md:gap-0 md:flex-row justify-between'>
@@ -34,6 +36,8 @@ const ProjectsHome = async () => {
 								title={property.title}
 								locationValue={property.locationValue}
 								description={property.description}
+								id={property.id}
+								currentUser={currentUser}
 							/>
 						))}
 					</div>

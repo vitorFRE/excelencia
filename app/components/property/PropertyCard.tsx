@@ -2,15 +2,18 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { LuMapPin } from 'react-icons/lu'
+import HeartButton from '../inputs/HeartButton'
+import { SafeUser } from '@/app/types'
 
 interface PropertyCardProps {
-	id?: string
+	id: string
 	image: string
 	title: string
 	description: string
 	locationValue: string
 	city: string
 	state: string
+	currentUser?: SafeUser | null
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
@@ -20,7 +23,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 	id,
 	locationValue,
 	city,
-	state
+	state,
+	currentUser
 }) => {
 	const router = useRouter()
 
@@ -36,6 +40,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 						src={image}
 						className='object-cover h-full w-full group-hover:scale-110 transition'
 					/>
+					<div className='absolute top-3 right-3'>
+						<HeartButton propertyId={id} currentUser={currentUser} />
+					</div>
 				</div>
 				<section className='flex flex-col gap-2 px-4 pt-4 pb-7'>
 					<h3 className='text-[20px] font-bold leading-normal'>{title}</h3>
