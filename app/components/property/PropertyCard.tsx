@@ -30,7 +30,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
 	return (
 		<div
-			onClick={() => router.push(`/propriedades/${id}`)}
+			onClick={() => router.push(`/imovel/${id}`)}
 			className='col-span-1 cursor-pointer group '>
 			<div className='flex flex-col gap-2 w-full min-h-full rounded-xl bg-white/70 border border-cBorder '>
 				<div className='aspect-square w-full relative overflow-hidden rounded-t-xl'>

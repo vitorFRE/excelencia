@@ -10,9 +10,9 @@ cloudinary.config({
 export async function POST(request: Request) {
 	try {
 		const body = await request.json()
-		const { imagesId } = body
+		const { imageIds } = body
 
-		const deleteResult = await deleteImage(imagesId)
+		const deleteResult = await deleteImage(imageIds)
 
 		return NextResponse.json({ message: 'Images deleted successfully', deleteResult })
 	} catch (error) {

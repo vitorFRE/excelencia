@@ -80,7 +80,7 @@ model Favorite {
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
-  property  Property @relation(fields: [propertyId], references: [id])
+  property  Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId String
 
   @@unique([user_id, propertyId])
@@ -89,7 +89,7 @@ model Favorite {
 model Property {
   id        String   @id @default(cuid())
   title     String
-  description String
+  description String @db.VarChar(600)
   price     Int
   area Float
   buildingArea Float
@@ -108,14 +108,14 @@ model Property {
   images      PropertyImage[]
   favorites Favorite[]
 
-  owner      User    @relation(fields: [ownerId], references: [id])
+  owner      User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId    String
 }
 
 model PropertyImage {
   id        String   @id @default(cuid())
 
-  property  Property @relation(fields: [propertyId], references: [id])
+  property  Property @relation(fields: [propertyId], references: [id], onDelete: Cascade) 
   propertyId String
 
   imageUrl  String

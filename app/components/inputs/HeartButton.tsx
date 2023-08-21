@@ -22,7 +22,7 @@ const HeartButton: React.FC<HeartButtonProps> = ({ propertyId, currentUser }) =>
 				size={28}
 				className={`text-white absolute -top-[2px] -right-[2px] ${
 					hasFavorited ? 'fill-rose-500' : 'fill-neutral-500/70'
-				}`}
+				} `}
 			/>
 		</div>
 	)

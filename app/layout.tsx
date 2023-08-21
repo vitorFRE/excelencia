@@ -8,6 +8,8 @@ import ToasterProvider from './providers/ToasterProvider'
 import LoginModal from './components/modals/LoginModal'
 import AddPropertyModal from './components/modals/AddPropertyModal'
 import Footer from './components/footer/Footer'
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 const inter = Inter({ subsets: ['latin'] })
 

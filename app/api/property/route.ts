@@ -72,3 +72,36 @@ export async function POST(request: Request) {
 
 	return NextResponse.json(property)
 }
+
+export async function DELETE(request: Request) {
+	const currentUser = await getCurrentUser()
+
+	if (!currentUser) {
+		return NextResponse.error()
+	}
+
+	const body = await request.json()
+	const { propertyId } = body
+
+	const property = await prisma.property.findUnique({
+		where: {
+			id: propertyId
+		}
+	})
+
+	if (!property) {
+		return NextResponse.error()
+	}
+
+	if (currentUser.role !== 'ADMIN') {
+		return NextResponse.error()
+	}
+
+	await prisma.property.delete({
+		where: {
+			id: propertyId
+		}
+	})
+
+	return NextResponse.json({ message: 'propriedade deletada' })
+}

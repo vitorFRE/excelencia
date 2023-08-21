@@ -16,7 +16,7 @@ const ProjectsHome = async () => {
 					title='Imóveis que talvez você goste!'
 					subtitle='Confira nossa seleção de imóveis que podem ser perfeitos para você'
 				/>
-				<Link href='/' className='text-primary font-semibold'>
+				<Link href='/imoveis' className='text-primary font-semibold'>
 					Veja todos os imóveis
 				</Link>
 			</div>
