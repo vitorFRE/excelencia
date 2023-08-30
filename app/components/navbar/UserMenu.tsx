@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Avatar from '../Avatar'
 import { useRouter } from 'next/navigation'
 import MenuItem from './MenuItem'
@@ -18,14 +18,30 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 	const registerModal = useRegisterModal()
 	const loginModal = useLoginModal()
 	const addPropertyModal = useAddPropertyModal()
+	const menuRef: React.RefObject<HTMLDivElement> = useRef(null)
 	const [isOpen, setIsOpen] = useState(false)
 	const router = useRouter()
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen((value) => !value)
 	}, [])
+
+	const handleClickOutside = (event: MouseEvent) => {
+		if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+			setIsOpen(false)
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClickOutside)
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+	}, [])
+
 	return (
-		<div className='relative'>
+		<div className='relative' ref={menuRef}>
 			<div className='flex flex-row items-center gap-3'>
 				<div onClick={toggleOpen} className='cursor-pointer'>
 					<Avatar />
@@ -47,7 +63,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 								{currentUser && currentUser.role === 'ADMIN' ? (
 									<>
 										<hr />
-										<MenuItem onClick={() => router.push('/')} label='Propriedades' />
+										<MenuItem
+											onClick={() => router.push('/propriedades')}
+											label='Propriedades'
+										/>
 										<MenuItem onClick={addPropertyModal.onOpen} label='Adicionar' />
 									</>
 								) : null}
@@ -56,7 +75,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 							</>
 						) : (
 							<>
-								<MenuItem onClick={() => router.push('/')} label='Imóveis à venda' />
+								<MenuItem
+									onClick={() => router.push('/imoveis')}
+									label='Imóveis à venda'
+								/>
 								<MenuItem onClick={() => router.push('/')} label='Anuncie seu Imóvel' />
 								<MenuItem onClick={() => router.push('/')} label='Contato' />
 								<hr />

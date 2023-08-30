@@ -3,6 +3,7 @@ import EmptyState from '@/app/components/EmptyState'
 import PropertyClient from './PropertyClient'
 import Container from '@/app/components/Container'
 import getCurrentUser from '@/app/actions/getCurrentUser'
+import getPropertys from '@/app/actions/getPropertys'
 
 interface IParams {
 	imovelId?: string
@@ -12,6 +13,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
 	const { imovelId } = params
 
 	const property = imovelId ? await getPropertyById(imovelId) : null
+	const recentProperties = await getPropertys({ take: 3 })
 	const currentUser = await getCurrentUser()
 
 	if (!property) {
@@ -20,7 +22,11 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
 
 	return (
 		<Container>
-			<PropertyClient property={property} currentUser={currentUser} />
+			<PropertyClient
+				property={property}
+				currentUser={currentUser}
+				recentProperties={recentProperties}
+			/>
 		</Container>
 	)
 }

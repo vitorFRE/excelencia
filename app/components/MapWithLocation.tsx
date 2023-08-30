@@ -13,7 +13,7 @@ const MapWithLocation: React.FC<MapWithLocationProps> = ({ lat, lng }) => {
 		<MapContainer
 			center={[lat, lng]}
 			zoom={14}
-			scrollWheelZoom={true}
+			scrollWheelZoom={false}
 			className='h-[45vh] rounded-lg'>
 			<TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 			<CircleMarker

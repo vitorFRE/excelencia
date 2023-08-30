@@ -4,19 +4,23 @@ import Heading from '../components/Heading'
 import PropertyCard from '../components/property/PropertyCard'
 import { Property } from '../actions/getPropertys'
 import { SafeUser } from '../types'
+import DeleteProperty from '../components/deleteProperty/DeleteProperty'
 
-interface PropertiesCleintProps {
+interface PropertysPageClientProps {
 	listings: Property[]
 	currentUser?: SafeUser | null
 }
 
-const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings, currentUser }) => {
+const PropertysPageClient: React.FC<PropertysPageClientProps> = ({
+	listings,
+	currentUser
+}) => {
 	return (
 		<Container>
 			<div className='pt-[75px]'>
 				<Heading
 					title='Propriedades'
-					subtitle='Lista de nossas propriedades disponíveis'
+					subtitle='Lista de nossas propriedades cadastradas'
 				/>
 			</div>
 			<>
@@ -40,6 +44,12 @@ const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings, currentUs
 									id={property.id}
 									currentUser={currentUser}
 								/>
+								{property.images && property.images.length > 0 && (
+									<DeleteProperty
+										propertyId={property.id}
+										imageIds={property.images.map((image) => image.imageId)}
+									/>
+								)}
 							</div>
 						))}
 					</div>
@@ -49,4 +59,4 @@ const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings, currentUs
 	)
 }
 
-export default PropertiesClient
+export default PropertysPageClient

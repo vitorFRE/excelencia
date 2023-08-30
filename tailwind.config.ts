@@ -16,6 +16,9 @@ const config: Config = {
 			},
 			backgroundImage: {
 				'hero-bg': "url('/images/BG.jpg')"
+			},
+			gridTemplateColumns: {
+				imovel: '2fr 1fr'
 			}
 		}
 	},
