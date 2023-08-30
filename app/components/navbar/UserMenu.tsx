@@ -57,8 +57,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 									onClick={() => router.push('/imoveis')}
 									label='Imóveis à venda'
 								/>
-								<MenuItem onClick={() => router.push('/')} label='Anuncie seu Imóvel' />
-								<MenuItem onClick={() => router.push('/')} label='Contato' />
+								<MenuItem
+									onClick={() => router.push('/contato')}
+									label='Anuncie seu Imóvel'
+								/>
+								<MenuItem onClick={() => router.push('/contato')} label='Contato' />
 								<MenuItem onClick={() => router.push('/favoritos')} label='Favoritos' />
 								{currentUser && currentUser.role === 'ADMIN' ? (
 									<>
@@ -79,8 +82,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 									onClick={() => router.push('/imoveis')}
 									label='Imóveis à venda'
 								/>
-								<MenuItem onClick={() => router.push('/')} label='Anuncie seu Imóvel' />
-								<MenuItem onClick={() => router.push('/')} label='Contato' />
+								<MenuItem
+									onClick={() => router.push('/contato')}
+									label='Anuncie seu Imóvel'
+								/>
+								<MenuItem onClick={() => router.push('/contato')} label='Contato' />
 								<hr />
 								<MenuItem onClick={loginModal.onOpen} label='Login' />
 								<MenuItem onClick={registerModal.onOpen} label='Cadastrar' />

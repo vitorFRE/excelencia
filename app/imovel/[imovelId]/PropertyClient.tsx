@@ -16,6 +16,7 @@ import Button from '@/app/components/Button'
 import RecentPropertiesCard from '@/app/components/imovel/RecentPropertiesCard'
 
 import dynamic from 'next/dynamic'
+import Heading from '@/app/components/Heading'
 
 const MapWithLocation = dynamic(() => import('@/app/components/MapWithLocation'), {
 	ssr: false
@@ -77,7 +78,7 @@ const PropertyClient: React.FC<PropertyClientProps> = ({
 
 				<ImageGrid images={property.images} />
 
-				<div className='grid grid-cols-imovel gap-4 '>
+				<div className='grid grid-cols-1 lg:grid-cols-imovel gap-4 '>
 					<div>
 						<div className='mt-6 bg-white/70 border border-cBorder py-3 pl-4 pr-6 rounded-lg'>
 							<h2 className='text-2xl font-bold mb-3'>Descrição</h2>
@@ -114,7 +115,12 @@ const PropertyClient: React.FC<PropertyClientProps> = ({
 					</div>
 					<div>
 						<div className='defaultBorder mt-6 h-max'>
-							<form className='flex flex-col gap-4'>
+							<Heading
+								title='Entre em contato'
+								subtitle='Estamos sempre prontos para te ajudar'
+							/>
+
+							<form className='flex flex-col gap-4 mt-4'>
 								<Input
 									id='name'
 									label='Nome'

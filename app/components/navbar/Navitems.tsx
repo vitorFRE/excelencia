@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 const NavItem = [
 	{ href: '/imoveis', label: 'Imóveis à venda' },
-	{ href: '/', label: 'Anuncie seu Imóvel' },
-	{ href: '/', label: 'Contato' }
+	{ href: '/contato', label: 'Anuncie seu Imóvel' },
+	{ href: '/contato', label: 'Contato' }
 ]
 
 const Navitems = () => {

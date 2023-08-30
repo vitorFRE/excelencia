@@ -25,22 +25,19 @@ const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings, currentUs
 				) : (
 					<div className='pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-8'>
 						{listings.map((property) => (
-							<div key={property.title}>
-								<PropertyCard
-									image={
-										property.images && property.images[0]
-											? property.images[0].imageUrl
-											: ''
-									}
-									city={property.city}
-									state={property.state}
-									title={property.title}
-									locationValue={property.locationValue}
-									description={property.description}
-									id={property.id}
-									currentUser={currentUser}
-								/>
-							</div>
+							<PropertyCard
+								key={property.title}
+								image={
+									property.images && property.images[0] ? property.images[0].imageUrl : ''
+								}
+								city={property.city}
+								state={property.state}
+								title={property.title}
+								locationValue={property.locationValue}
+								description={property.description}
+								id={property.id}
+								currentUser={currentUser}
+							/>
 						))}
 					</div>
 				)}
