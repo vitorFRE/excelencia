@@ -8,6 +8,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
@@ -84,6 +85,7 @@ model Favorite {
   propertyId String
 
   @@unique([user_id, propertyId])
+  @@index([propertyId])
 }
 
 model Property {
@@ -110,6 +112,8 @@ model Property {
 
   owner      User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId    String
+
+  @@index([ownerId])
 }
 
 model PropertyImage {
