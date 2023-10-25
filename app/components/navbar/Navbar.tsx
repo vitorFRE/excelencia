@@ -3,8 +3,9 @@ import FavoritesHeartCount from './FavoritesHeartCount'
 import Logo from './Logo'
 import Navitems from './Navitems'
 import Topbar from './Topbar'
-import UserMenu from './UserMenu'
 import { SafeUser } from '@/app/types'
+import { ModeToggle } from './toggle-darkmode'
+import { UserMenu } from './user-menu'
 
 interface NavBarProps {
 	currentUser?: SafeUser | null
@@ -12,7 +13,7 @@ interface NavBarProps {
 
 const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
 	return (
-		<div className=' w-full bg-white z-20'>
+		<div className=' w-full dark:bg-surface z-20'>
 			<Topbar phoneNumber='(00) 87129-7143' />
 			<header className='py-4 border-b-[1px]'>
 				<Container>
@@ -20,6 +21,7 @@ const Navbar: React.FC<NavBarProps> = ({ currentUser }) => {
 						<Logo />
 						<Navitems />
 						<div className='flex gap-3 items-center'>
+							<ModeToggle />
 							<FavoritesHeartCount currentUser={currentUser} />
 							<UserMenu currentUser={currentUser} />
 						</div>

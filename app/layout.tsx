@@ -10,6 +10,7 @@ import AddPropertyModal from './components/modals/AddPropertyModal'
 import Footer from './components/footer/Footer'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import { ThemeProvider } from './providers/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,16 +21,23 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 	const currentUser = await getCurrentUser()
+
 	return (
-		<html lang='pt-br'>
+		<html
+			suppressHydrationWarning
+			lang='pt-br'
+			style={{ colorScheme: 'dark' }}
+			className={`dark`}>
 			<body className={inter.className}>
-				<ToasterProvider />
-				<AddPropertyModal />
-				<LoginModal />
-				<RegisterModal />
-				<Navbar currentUser={currentUser} />
-				<div className='pb-20'>{children}</div>
-				<Footer />
+				<ThemeProvider attribute='class' defaultTheme='dark'>
+					<ToasterProvider />
+					<AddPropertyModal />
+					<LoginModal />
+					<RegisterModal />
+					<Navbar currentUser={currentUser} />
+					<div className='pb-20'>{children}</div>
+					<Footer />
+				</ThemeProvider>
 			</body>
 		</html>
 	)

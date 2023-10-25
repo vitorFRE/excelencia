@@ -11,7 +11,10 @@ const Navitems = () => {
 		<nav className='hidden md:flex flex-row items-center gap-2'>
 			{NavItem.map((i) => {
 				return (
-					<Link href={i.href} key={i.label} className='text-sm font-semibold'>
+					<Link
+						href={i.href}
+						key={i.label}
+						className='text-sm dark:text-slate-400 font-semibold'>
 						{i.label}
 					</Link>
 				)
