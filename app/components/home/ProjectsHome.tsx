@@ -16,7 +16,7 @@ const ProjectsHome = async () => {
 					title='Imóveis que talvez você goste!'
 					subtitle='Confira nossa seleção de imóveis que podem ser perfeitos para você'
 				/>
-				<Link href='/imoveis' className='text-primary font-semibold'>
+				<Link href='/imoveis' className='text-blue-600 font-semibold'>
 					Veja todos os imóveis
 				</Link>
 			</div>
@@ -24,7 +24,7 @@ const ProjectsHome = async () => {
 				{listing.length === 0 ? (
 					<EmptyState subtitle='Parece que houve um erro' />
 				) : (
-					<div className='pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-8'>
+					<div className='pt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-8'>
 						{listing.map((property) => (
 							<PropertyCard
 								image={

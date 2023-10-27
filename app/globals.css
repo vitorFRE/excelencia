@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .defaultBorder {
-  @apply bg-white/70 border border-cBorder py-3 pl-4 pr-6 rounded-lg
-} */
 
 .leaflet-bottom,.leaflet-control,.leaflet-pane,.leaflet-top {
   z-index: 0 !important;
@@ -53,7 +50,7 @@
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: #0C0B0D;
     --foreground: 210 40% 98%;
  
     --card: 222.2 84% 4.9%;

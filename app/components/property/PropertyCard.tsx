@@ -32,7 +32,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 		<div
 			onClick={() => router.push(`/imovel/${id}`)}
 			className='col-span-1 cursor-pointer group '>
-			<div className='flex flex-col gap-2 w-full min-h-full rounded-xl bg-white/70 border border-cBorder '>
+			<div className='flex flex-col gap-2 w-full min-h-full rounded-xl dark:bg-[#191A1E] border border-cBorder '>
 				<div className='aspect-square w-full relative overflow-hidden rounded-t-xl'>
 					<Image
 						fill
@@ -45,13 +45,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 					</div>
 				</div>
 				<section className='flex flex-col gap-2 px-4 pt-4 pb-7'>
-					<h3 className='text-[20px] font-bold leading-normal'>{title}</h3>
-					<span className='text-sm font-medium text-[#898989] flex gap-2 items-center'>
-						<LuMapPin size={16} /> {locationValue},{city} - {state}
+					<h3 className='dark:text-slate-50 font-bold text-lg'>{title}</h3>
+					<span className='text-base font-medium dark:text-slate-500 flex items-center'>
+						<LuMapPin size={18} /> {locationValue},{city} - {state}
 					</span>
-					<p className='font-medium line-clamp-3 leading-6 text-[#374151]'>
-						{description}
-					</p>
+					<p className='text-sm font-medium line-clamp-3 text-slate-400'>{description}</p>
 				</section>
 			</div>
 		</div>
