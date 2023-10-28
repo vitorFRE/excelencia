@@ -3,7 +3,7 @@ import Heading from './components/Heading'
 import ProjectsHome from './components/home/ProjectsHome'
 import { LuDollarSign, LuHome, LuWallet } from 'react-icons/lu'
 import { Feedbacks } from './components/home/feedbacks'
-import { Hero } from './components/home/hero'
+import { HeroSection } from './components/home/hero-section'
 
 const infos = [
 	{
@@ -29,7 +29,7 @@ const infos = [
 export default function Home() {
 	return (
 		<main className=''>
-			<Hero />
+			<HeroSection />
 			<ProjectsHome />
 			<Container>
 				<Feedbacks />

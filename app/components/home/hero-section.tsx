@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
-export const Hero = () => {
+export const HeroSection = () => {
 	const router = useRouter()
 	return (
 		<section className='h-[350px] relative bg-center bg-cover bg-hero-bg'>
