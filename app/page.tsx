@@ -1,9 +1,9 @@
 import Container from './components/Container'
 import Heading from './components/Heading'
-import Hero from './components/home/hero'
 import ProjectsHome from './components/home/ProjectsHome'
 import { LuDollarSign, LuHome, LuWallet } from 'react-icons/lu'
 import { Feedbacks } from './components/home/feedbacks'
+import { Hero } from './components/home/hero'
 
 const infos = [
 	{
