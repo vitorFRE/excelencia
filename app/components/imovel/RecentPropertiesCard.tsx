@@ -26,7 +26,7 @@ const RecentPropertiesCard: React.FC<RecentPropertiesCardProps> = ({
 	return (
 		<div
 			onClick={() => router.push(`/imovel/${id}`)}
-			className='defaultBorder flex gap-4 cursor-pointer group '>
+			className='border rounded-lg flex gap-4 cursor-pointer group '>
 			<picture>
 				<img
 					className='w-[111px] h-[96px] rounded-lg group-hover:scale-110 transition'

@@ -1,12 +1,10 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Ghost } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const NavItem = [
 	{ href: '/imoveis', label: 'Imóveis à venda' },
-	{ href: '/contato', label: 'Anuncie seu Imóvel' },
 	{ href: '/contato', label: 'Contato' }
 ]
 
