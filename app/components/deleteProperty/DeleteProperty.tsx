@@ -29,16 +29,16 @@ const DeleteProperty: React.FC<deletePropertyProps> = ({ imageIds, propertyId })
 			await axios
 				.post(`/api/imageDelete`, { imageIds })
 				.then(() => {
-					toast.success('toma no cu')
+					toast.success('Imagens deletas')
 				})
 				.catch(() => {
-					toast.error('é isso')
+					toast.error('Erro ao deletar imagens')
 				})
 
 			router.refresh()
 			toast.success('propriedade deletada')
 		} catch (error) {
-			toast.error('deu erro ai pra deleta')
+			toast.error('Erro ao deletar propriedade')
 		} finally {
 			setLoading(false)
 		}

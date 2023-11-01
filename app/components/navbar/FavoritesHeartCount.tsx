@@ -17,8 +17,8 @@ const FavoritesHeartCount: React.FC<FavoritesHeartCountProps> = ({ currentUser }
 			{currentUser ? (
 				<Link href='/favoritos'>
 					<div className='relative cursor-pointer'>
-						<LuHeart size={24} className='text-primary cursor-pointer' />
-						<span className='absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-white'>
+						<LuHeart size={24} className=' cursor-pointer' />
+						<span className='absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-white dark:text-slate-900'>
 							{currentUser.favorites.length}
 						</span>
 					</div>
@@ -26,7 +26,7 @@ const FavoritesHeartCount: React.FC<FavoritesHeartCountProps> = ({ currentUser }
 			) : (
 				<div className='relative cursor-pointer' onClick={registerModal.onOpen}>
 					<LuHeart size={24} className='text-primary cursor-pointer' />
-					<span className='absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-white'>
+					<span className='absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-white dark:text-slate-900'>
 						0
 					</span>
 				</div>

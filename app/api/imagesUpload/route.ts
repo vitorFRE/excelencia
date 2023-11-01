@@ -29,7 +29,10 @@ async function Uploader(pinga: File) {
 		return await cloudinary.uploader.upload(dale, {
 			upload_preset: 'excelencia',
 			overwrite: true,
-			invalidate: true
+			invalidate: true,
+			transformation: {
+				quality: 60
+			}
 		})
 	} catch (err) {
 		console.log('DEBUG(pinga)', err)
