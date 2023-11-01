@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const NavItem = [
+	{ href: '/', label: 'Inicio' },
 	{ href: '/imoveis', label: 'Imóveis à venda' },
 	{ href: '/contato', label: 'Contato' }
 ]

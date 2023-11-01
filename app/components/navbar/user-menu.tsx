@@ -1,6 +1,17 @@
 'use client'
 
-import { CreditCard, LogOut, Plus, Settings, User, Users } from 'lucide-react'
+import {
+	Building2,
+	CreditCard,
+	Home,
+	LogOut,
+	Phone,
+	Plus,
+	Settings,
+	Star,
+	User,
+	Users
+} from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -43,18 +54,18 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuItem onClick={() => router.push('/imoveis')}>
-						<User className='mr-2 h-4 w-4' />
+						<Home className='mr-2 h-4 w-4' />
 						<span>Imóveis à venda</span>
 					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => router.push('/contato')}>
-						<CreditCard className='mr-2 h-4 w-4' />
+						<Phone className='mr-2 h-4 w-4' />
 						<span>Contato</span>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 
 				{currentUser ? (
 					<DropdownMenuItem onClick={() => router.push('/favoritos')}>
-						<Settings className='mr-2 h-4 w-4' />
+						<Star className='mr-2 h-4 w-4' />
 						<span>Favoritos</span>
 					</DropdownMenuItem>
 				) : null}
@@ -64,11 +75,11 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 				{currentUser && currentUser.role === 'ADMIN' ? (
 					<>
 						<DropdownMenuItem onClick={() => router.push('/propriedades')}>
-							<LogOut className='mr-2 h-4 w-4' />
+							<Building2 className='mr-2 h-4 w-4' />
 							<span>Propriedades</span>
 						</DropdownMenuItem>
 						<DropdownMenuItem onClick={addPropertyModal.onOpen}>
-							<LogOut className='mr-2 h-4 w-4' />
+							<Plus className='mr-2 h-4 w-4' />
 							<span>Adicionar</span>
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />

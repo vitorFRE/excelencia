@@ -27,7 +27,7 @@ const PropertysPageClient: React.FC<PropertysPageClientProps> = ({
 				{listings.length === 0 ? (
 					<EmptyState subtitle='Parece que houve um erro' />
 				) : (
-					<div className='pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-8'>
+					<div className='pt-10  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 gap-8'>
 						{listings.map((property) => (
 							<div key={property.title}>
 								<PropertyCard
