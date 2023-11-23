@@ -1,6 +1,7 @@
 'use client'
 
 import {
+	Building,
 	Building2,
 	CreditCard,
 	Home,
@@ -64,25 +65,25 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 				</DropdownMenuGroup>
 
 				{currentUser ? (
-					<DropdownMenuItem onClick={() => router.push('/favoritos')}>
-						<Star className='mr-2 h-4 w-4' />
-						<span>Favoritos</span>
-					</DropdownMenuItem>
-				) : null}
-
-				<DropdownMenuSeparator />
-
-				{currentUser && currentUser.role === 'ADMIN' ? (
 					<>
-						<DropdownMenuItem onClick={() => router.push('/propriedades')}>
-							<Building2 className='mr-2 h-4 w-4' />
-							<span>Propriedades</span>
-						</DropdownMenuItem>
-						<DropdownMenuItem onClick={addPropertyModal.onOpen}>
-							<Plus className='mr-2 h-4 w-4' />
-							<span>Adicionar</span>
+						<DropdownMenuItem onClick={() => router.push('/favoritos')}>
+							<Star className='mr-2 h-4 w-4' />
+							<span>Favoritos</span>
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
+						{currentUser && currentUser.role === 'ADMIN' ? (
+							<>
+								<DropdownMenuItem onClick={() => router.push('/gerenciar')}>
+									<Building className='mr-2 h-4 w-4' />
+									<span>Gerenciar</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={addPropertyModal.onOpen}>
+									<Plus className='mr-2 h-4 w-4' />
+									<span>Adicionar</span>
+								</DropdownMenuItem>
+								<DropdownMenuSeparator />
+							</>
+						) : null}
 						<DropdownMenuItem onClick={() => signOut()}>
 							<LogOut className='mr-2 h-4 w-4' />
 							<span>Sair</span>
@@ -94,6 +95,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 							<Users className='mr-2 h-4 w-4' />
 							<span>Entrar</span>
 						</DropdownMenuItem>
+						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={registerModal.onOpen}>
 							<Plus className='mr-2 h-4 w-4' />
 							<span>Registre-se</span>

@@ -49,7 +49,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
 						fill
 						placeholder='blur'
 						blurDataURL={placeholderBlurhash}
-						onLoadingComplete={() => setIsLoading(false)}
+						onLoad={() => setIsLoading(false)}
 						className={`object-cover w-full duration-500 ease-in-out ${
 							isLoading ? 'scale-105 blur-lg' : 'scale-100 blur-0'
 						}`}
@@ -61,6 +61,5 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
 		</Swiper>
 	)
 }
-
 
 export default ImageGrid

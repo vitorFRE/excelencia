@@ -1,6 +1,5 @@
 'use client'
 
-import { PropertyImage } from '@prisma/client'
 import Button from '../Button'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -9,7 +8,7 @@ import axios from 'axios'
 
 interface deletePropertyProps {
 	propertyId: string
-	imageIds: string[]
+	imageIds: string[] | undefined
 }
 
 const DeleteProperty: React.FC<deletePropertyProps> = ({ imageIds, propertyId }) => {

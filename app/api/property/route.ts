@@ -80,6 +80,10 @@ export async function DELETE(request: Request) {
 		return NextResponse.error()
 	}
 
+	if (currentUser.role !== 'ADMIN') {
+		return NextResponse.error()
+	}
+
 	const body = await request.json()
 	const { propertyId } = body
 
