@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import { z } from 'zod'
@@ -14,6 +14,10 @@ import { Textarea } from '@/components/ui/textarea'
 import CounterT from '@/app/components/inputs/CounterTest'
 import dynamic from 'next/dynamic'
 import { LatLng } from '@/app/components/MapWithMarker'
+import { useDropzone } from 'react-dropzone'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -45,9 +49,35 @@ export default function Form() {
 
 	const [previousStep, setPreviousStep] = useState(0)
 	const [currentStep, setCurrentStep] = useState(0)
+	const router = useRouter()
 	const delta = currentStep - previousStep
 
 	const Map = dynamic(() => import('../../components/MapWithMarker'), { ssr: false })
+
+	//testando
+
+	const [previews, setPreviews] = useState<(string | ArrayBuffer)[]>([])
+
+	const onDrop = useCallback((acceptedFiles: File[]) => {
+		acceptedFiles.forEach((file: File) => {
+			const reader = new FileReader()
+
+			reader.onload = () => {
+				const result = reader.result
+				if (result) {
+					setPreviews((prevPreviews) => [...prevPreviews, result])
+				}
+			}
+
+			reader.readAsDataURL(file)
+		})
+	}, [])
+
+	const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
+		onDrop
+	})
+
+	//fim
 
 	const setCustomValue = (id: any, value: any) => {
 		setValue(id, value, {
@@ -80,9 +110,45 @@ export default function Form() {
 		resolver: zodResolver(FormDataSchema)
 	})
 
-	const processForm: SubmitHandler<Inputs> = (data) => {
-		console.log(data)
-		reset()
+	const processForm: SubmitHandler<Inputs> = async (data) => {
+		try {
+			if (acceptedFiles.length === 0) return
+
+			const uploadPromises = acceptedFiles.map(async (file) => {
+				const formData = new FormData()
+				formData.append('file', file)
+				formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET)
+				formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY)
+
+				const result = await fetch(
+					`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+					{
+						method: 'POST',
+						body: formData
+					}
+				).then((r) => r.json())
+
+				return result
+			})
+
+			const results = await Promise.all(uploadPromises)
+
+			const propertyData = {
+				...data,
+				images: results.map((image: any) => ({
+					id: image.public_id,
+					url: image.secure_url
+				}))
+			}
+
+			await axios.post('/api/property', propertyData)
+
+			toast.success('Propriedade Criada')
+			router.refresh()
+			reset()
+		} catch {
+			toast.error('Algo deu ao criar a propriedade!')
+		}
 	}
 
 	const roomCounterValue = watch('roomCount', 0)
@@ -271,6 +337,27 @@ export default function Form() {
 									value={bathroomCounterValue}
 									onValueChange={(value) => setValue('bathroomCount', value)}
 								/>
+							</div>
+
+							<div>
+								<div className='bg-yellow-200' {...getRootProps()}>
+									<input {...getInputProps()} />
+									{isDragActive ? (
+										<p>Drop the files here ...</p>
+									) : (
+										<p>Drag n drop some files here, or click to select files</p>
+									)}
+								</div>
+
+								{previews.length > 0 && (
+									<div className='mb-5'>
+										{previews.map((preview, index) => (
+											<div key={index}>
+												<img src={preview as string} alt={`Upload preview ${index}`} />
+											</div>
+										))}
+									</div>
+								)}
 							</div>
 						</div>
 					</motion.div>

@@ -1,27 +1,27 @@
 import { z } from 'zod'
 
 export const FormDataSchema = z.object({
-	title: z.string().min(6, 'Deve conter no minimo 6 caracteres!!'),
+	title: z.string().min(6, 'Deve conter no mínimo 6 caracteres!!'),
 
 	description: z
 		.string()
-		.min(6, 'Deve conter no minimo 6 caracteres!')
+		.min(6, 'Deve conter no mínimo 6 caracteres!')
 		.max(600, 'Pode ter no maximo 600 caracteres'),
 
 	price: z
 		.number()
-		.positive({ message: 'Deve ser um numero positivo' })
-		.min(100, 'Deve ser no mínimo um número de três dígitos'),
+		.positive({ message: 'Deve ser um número positivo' })
+		.min(1, 'Deve conter no mínimo um dígito'),
 
 	area: z
 		.number()
-		.positive({ message: 'Deve ser um numero positivo' })
-		.min(100, 'Deve ser no mínimo um número de três dígitos'),
+		.positive({ message: 'Deve ser um número positivo' })
+		.min(1, 'Deve conter no mínimo um dígito'),
 
 	buildingArea: z
 		.number()
-		.positive({ message: 'Deve ser um numero positivo' })
-		.min(100, 'Deve ser no mínimo um número de três dígitos'),
+		.positive({ message: 'Deve ser um número positivo' })
+		.min(1, 'Deve conter no mínimo um dígito'),
 
 	roomCount: z.number().int(),
 	bedroomCount: z.number().int(),
