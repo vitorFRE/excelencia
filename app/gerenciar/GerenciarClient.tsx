@@ -21,7 +21,7 @@ export const GerenciarClient: React.FC<GerenciarProps> = ({ listings, currentUse
 					description={property.description}
 					id={property.id}
 					currentUser={currentUser}
-					imagesId={property.images?.map((image) => image.imageId)}
+					imageIds={property.images ? property.images.map((image) => image.imageId) : []}
 					deleteButton
 				/>
 			))}

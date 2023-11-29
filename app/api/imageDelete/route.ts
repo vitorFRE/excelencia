@@ -25,8 +25,10 @@ async function deleteImage(publicIds: any) {
 	return new Promise((resolve, reject) => {
 		cloudinary.api.delete_resources(publicIds, (error, result) => {
 			if (error) {
+				console.log(error)
 				reject(error)
 			} else {
+				console.log(result)
 				resolve(result)
 			}
 		})

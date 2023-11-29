@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 import { LuMapPin } from 'react-icons/lu'
 import HeartButton from '../inputs/HeartButton'
 import { SafeUser } from '@/app/types'
-import DeleteProperty from '../deleteProperty/DeleteProperty'
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -19,12 +18,11 @@ import {
 import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Button } from '@/components/ui/button'
 
 interface PropertyCardProps {
 	id: string
 	image: string
-	imagesId?: string[] | undefined
+	imageIds: string[]
 	title: string
 	description: string
 	locationValue: string
@@ -44,7 +42,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 	state,
 	currentUser,
 	deleteButton,
-	imagesId
+	imageIds
 }) => {
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
@@ -60,7 +58,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 			})
 
 			await axios
-				.post(`/api/imageDelete`, { imagesId })
+				.post(`/api/imageDelete`, { imageIds })
 				.then(() => {
 					toast.success('Imagens deletas')
 				})

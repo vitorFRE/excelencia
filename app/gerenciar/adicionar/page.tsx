@@ -119,9 +119,9 @@ export default function Form() {
 				formData.append('file', file)
 				formData.append(
 					'upload_preset',
-					process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET as any
+					process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET as string
 				)
-				formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as any)
+				formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string)
 
 				const result = await fetch(
 					`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
