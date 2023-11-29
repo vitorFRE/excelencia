@@ -38,6 +38,7 @@ const ProjectsHome = async () => {
 								description={property.description}
 								id={property.id}
 								currentUser={currentUser}
+								imageIds={[]}
 							/>
 						))}
 					</div>

@@ -37,6 +37,7 @@ const PropertiesClient: React.FC<PropertiesCleintProps> = ({ listings, currentUs
 								description={property.description}
 								id={property.id}
 								currentUser={currentUser}
+								imageIds={[]}
 							/>
 						))}
 					</div>

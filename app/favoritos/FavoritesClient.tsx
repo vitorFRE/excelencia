@@ -27,6 +27,7 @@ const FavoritesClient: React.FC<FavoritesClientProps> = ({ listings, currentUser
 						description={listing.property.description}
 						id={listing.property.id}
 						currentUser={currentUser}
+						imageIds={[]}
 					/>
 				))}
 			</div>
