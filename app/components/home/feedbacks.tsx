@@ -10,7 +10,7 @@ export const Feedbacks = () => {
 				subtitle='O Que Dizem Sobre Nossos Serviços'
 			/>
 			<div className='pt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8'>
-				<div className='w-full min-h-full rounded-xl dark:bg-[#191A1E] px-4 pt-4 pb-7 border'>
+				<div className='w-full min-h-full rounded-xl  px-4 pt-4 pb-7 border'>
 					<div className='flex gap-6 mb-6'>
 						<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
 						<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
@@ -31,12 +31,14 @@ export const Feedbacks = () => {
 							<AvatarFallback>US</AvatarFallback>
 						</Avatar>
 						<div className='flex flex-col'>
-							<h4 className='font-medium text-slate-50'>Pedro Alves</h4>
+							<h4 className='font-medium text-slate-600 dark:text-slate-200'>
+								Pedro Alves
+							</h4>
 							<span className='text-slate-500 text-xs'>Coxim-ms</span>
 						</div>
 					</div>
 				</div>
-				<div className='w-full min-h-full rounded-xl dark:bg-[#191A1E] px-4 pt-4 pb-7 border'>
+				<div className='w-full min-h-full rounded-xl  px-4 pt-4 pb-7 border'>
 					<div className='flex gap-6 mb-6'>
 						<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
 						<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
@@ -58,12 +60,14 @@ export const Feedbacks = () => {
 							<AvatarFallback>US</AvatarFallback>
 						</Avatar>
 						<div className='flex flex-col'>
-							<h4 className='font-medium text-slate-50'>Sofia Ribeiro</h4>
+							<h4 className='font-medium text-slate-600 dark:text-slate-200'>
+								Sofia Ribeiro
+							</h4>
 							<span className='text-slate-500 text-xs'>Coxim-ms</span>
 						</div>
 					</div>
 				</div>
-				<div className='w-full min-h-full rounded-xl dark:bg-[#191A1E] px-4 pt-4 pb-7 border'>
+				<div className='w-full min-h-full rounded-xl  px-4 pt-4 pb-7 border'>
 					<div className='flex gap-6 mb-6'>
 						<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
 						<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
@@ -85,7 +89,9 @@ export const Feedbacks = () => {
 							<AvatarFallback>US</AvatarFallback>
 						</Avatar>
 						<div className='flex flex-col'>
-							<h4 className='font-medium text-slate-50'>Lucas Mendes</h4>
+							<h4 className='font-medium text-slate-600 dark:text-slate-200'>
+								Lucas Mendes
+							</h4>
 							<span className='text-slate-500 text-xs'>Coxim-ms</span>
 						</div>
 					</div>

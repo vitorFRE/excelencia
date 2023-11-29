@@ -102,35 +102,35 @@ const PropertyClient: React.FC<PropertyClientProps> = ({
 
 				<div className='grid grid-cols-1 lg:grid-cols-imovel gap-4 '>
 					<div>
-						<div className='mt-6 dark:bg-[#191A1E] border  py-3 pl-4 pr-6 rounded-lg'>
+						<div className='mt-6 border  py-3 pl-4 pr-6 rounded-lg'>
 							<h2 className='text-2xl font-bold mb-3'>Descrição</h2>
 							<p className='font-medium max-w-[600px]'>{property.description}</p>
 						</div>
 
 						<div className='gap-4 mt-6 grid grid-cols-2 md:grid-cols-3'>
-							<div className='flex flex-col gap-4 dark:bg-[#191A1E] border py-3 pl-4 pr-6 rounded-lg'>
+							<div className='flex flex-col gap-4 border py-3 pl-4 pr-6 rounded-lg'>
 								<LuBedDouble size={24} />
 								<p className='font-medium'>{property.bedroomCount} Quartos</p>
 							</div>
-							<div className='flex flex-col gap-4 dark:bg-[#191A1E] border py-3 pl-4 pr-6 rounded-lg'>
+							<div className='flex flex-col gap-4 border py-3 pl-4 pr-6 rounded-lg'>
 								<LuBath size={24} />
 								<p className='font-medium'>{property.bathroomCount} Banheiros</p>
 							</div>
-							<div className='flex flex-col gap-4 dark:bg-[#191A1E] border py-3 pl-4 pr-6 rounded-lg'>
+							<div className='flex flex-col gap-4 border py-3 pl-4 pr-6 rounded-lg'>
 								<LuBuilding size={24} />
 								<p className='font-medium'>{property.area}mt área total</p>
 							</div>
-							<div className='flex flex-col gap-4 dark:bg-[#191A1E] border py-3 pl-4 pr-6 rounded-lg'>
+							<div className='flex flex-col gap-4 border py-3 pl-4 pr-6 rounded-lg'>
 								<LuBuilding size={24} />
 								<p className='font-medium'>{property.buildingArea}mt área construida</p>
 							</div>
-							<div className='flex flex-col gap-4 dark:bg-[#191A1E] border py-3 pl-4 pr-6 rounded-lg'>
+							<div className='flex flex-col gap-4 border py-3 pl-4 pr-6 rounded-lg'>
 								<LuLamp size={24} />
 								<p className='font-medium'>{property.roomCount} total de cômodos</p>
 							</div>
 						</div>
 
-						<div className='mt-7 dark:bg-[#191A1E] border py-4 pl-4 pr-6 rounded-lg'>
+						<div className='mt-7 border py-4 pl-4 pr-6 rounded-lg'>
 							<h2 className='text-2xl font-bold'>Onde fica</h2>
 							<MapWithLocation lat={property.latitude} lng={property.longitude} />
 						</div>
@@ -145,7 +145,7 @@ const PropertyClient: React.FC<PropertyClientProps> = ({
 							<Form {...form}>
 								<form
 									onSubmit={form.handleSubmit(onSubmit)}
-									className='space-y-8 mt-6 sm:mt-0 border rounded-md py-5 px-4 dark:bg-[#191A1E]'>
+									className='space-y-8 mt-6 sm:mt-0 border rounded-md py-5 px-4'>
 									<FormField
 										control={form.control}
 										name='username'
@@ -219,7 +219,7 @@ const PropertyClient: React.FC<PropertyClientProps> = ({
 							</Form>
 						</div>
 						<h2 className='text-2xl font-bold mt-10 mb-4'>Propriedade recentes</h2>
-						<div className='flex flex-col gap-4 dark:bg-[#191A1E] space-y-8 mt-6 sm:mt-0 border rounded-md py-5 px-4'>
+						<div className='flex flex-col gap-4 space-y-8 mt-6 sm:mt-0 border rounded-md py-5 px-4'>
 							{recentProperties.map((property) => (
 								<RecentPropertiesCard
 									key={property.title}

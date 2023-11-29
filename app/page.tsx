@@ -38,9 +38,7 @@ export default function Home() {
 
 					<div className='pt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8'>
 						{infos.map((i) => (
-							<div
-								key={i.titulo}
-								className='dark:bg-[#191A1E] border  rounded-lg py-5 px-4'>
+							<div key={i.titulo} className='border  rounded-lg py-5 px-4'>
 								{i.icon}
 								<h2 className='font-semibold text-xl dark:text-slate-50 mb-2'>
 									{i.titulo}

@@ -3,7 +3,7 @@ import { SidebarNav } from '../components/sidebar-nav'
 
 const sidebarNavItems = [
 	{
-		title: 'Propriedades',
+		title: 'Lista de propriedades',
 		href: '/gerenciar'
 	},
 	{

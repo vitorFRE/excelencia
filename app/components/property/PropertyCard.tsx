@@ -16,6 +16,10 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
+import { useState } from 'react'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import { Button } from '@/components/ui/button'
 
 interface PropertyCardProps {
 	id: string
@@ -43,10 +47,39 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 	imagesId
 }) => {
 	const router = useRouter()
+	const [loading, setLoading] = useState(false)
+
+	const handleDelete = async () => {
+		try {
+			setLoading(true)
+
+			await axios.delete(`/api/property`, {
+				data: {
+					propertyId: id
+				}
+			})
+
+			await axios
+				.post(`/api/imageDelete`, { imagesId })
+				.then(() => {
+					toast.success('Imagens deletas')
+				})
+				.catch(() => {
+					toast.error('Erro ao deletar imagens')
+				})
+
+			router.refresh()
+			toast.success('propriedade deletada')
+		} catch (error) {
+			toast.error('Erro ao deletar propriedade')
+		} finally {
+			setLoading(false)
+		}
+	}
 
 	return (
 		<div className='col-span-1 group '>
-			<div className='flex flex-col gap-2 w-full min-h-full rounded-xl dark:bg-[#191A1E] border border-cBorder '>
+			<div className='flex flex-col gap-2 w-full min-h-full rounded-xl border border-cBorder '>
 				<div className='aspect-square w-full relative overflow-hidden rounded-t-xl'>
 					<Image
 						onClick={() => router.push(`/imovel/${id}`)}
@@ -62,29 +95,33 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 				<section className='flex flex-col gap-2 px-4 pt-4 pb-7'>
 					<h3 className='dark:text-slate-50 font-bold text-lg'>{title}</h3>
 					<span className='text-base font-medium dark:text-slate-500 flex items-center'>
-						<LuMapPin size={18} /> {locationValue},{city} - {state}
+						<LuMapPin size={18} />
+						{city} - {state}
 					</span>
 					<p className='text-sm font-medium line-clamp-3 text-slate-400'>{description}</p>
 				</section>
-				{deleteButton && id && imagesId && (
-					<DeleteProperty propertyId={id} imageIds={imagesId} />
-				)}
-				<AlertDialog>
-					<AlertDialogTrigger>Open</AlertDialogTrigger>
-					<AlertDialogContent>
-						<AlertDialogHeader>
-							<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-							<AlertDialogDescription>
-								This action cannot be undone. This will permanently delete your account
-								and remove your data from our servers.
-							</AlertDialogDescription>
-						</AlertDialogHeader>
-						<AlertDialogFooter>
-							<AlertDialogCancel>Cancel</AlertDialogCancel>
-							<AlertDialogAction>Continue</AlertDialogAction>
-						</AlertDialogFooter>
-					</AlertDialogContent>
-				</AlertDialog>
+				{deleteButton ? (
+					<AlertDialog>
+						<AlertDialogTrigger className='bg-red-700 py-2 rounded-b-xl'>
+							{loading ? 'Deletando...' : 'Deletar'}
+						</AlertDialogTrigger>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								<AlertDialogTitle>Você tem certeza que deseja deletar?</AlertDialogTitle>
+								<AlertDialogDescription>
+									Esta ação é irreversível. Isso resultará na exclusão permanente da
+									propriedade do site e dos servidores.
+								</AlertDialogDescription>
+							</AlertDialogHeader>
+							<AlertDialogFooter>
+								<AlertDialogCancel>Cancelar</AlertDialogCancel>
+								<AlertDialogAction onClick={handleDelete} disabled={loading}>
+									Confirmar
+								</AlertDialogAction>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialog>
+				) : null}
 			</div>
 		</div>
 	)

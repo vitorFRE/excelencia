@@ -14,7 +14,7 @@ const Footer = () => {
 				</div>
 				<Separator className='my-4' />
 				<div className='flex flex-col-reverse items-center gap-4 sm:flex-row justify-between mb-8'>
-					<p className='text-gray-400 text-center sm:text-start'>
+					<p className='text-slate-600 dark:text-slate-200 text-center sm:text-start'>
 						© 2024 Instate. Todos os direitos reservados.
 					</p>
 					<div className='flex items-center gap-4'>
