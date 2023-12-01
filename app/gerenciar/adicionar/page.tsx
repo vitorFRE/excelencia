@@ -18,6 +18,8 @@ import { useDropzone } from 'react-dropzone'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { ArrowUpIcon } from 'lucide-react'
+import Image from 'next/image'
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -342,26 +344,41 @@ export default function Form() {
 								/>
 							</div>
 
-							<div>
-								<div className='bg-yellow-200' {...getRootProps()}>
+							<div className='col-span-full xl:col-span-3'>
+								<Label htmlFor='buildingArea'>Imagens</Label>
+								<div
+									className='border border-dashed border-gray-300 p-4 rounded-lg cursor-pointer mt-2'
+									{...getRootProps()}>
 									<input {...getInputProps()} />
-									{isDragActive ? (
-										<p>Drop the files here ...</p>
-									) : (
-										<p>Drag n drop some files here, or click to select files</p>
-									)}
-								</div>
-
-								{previews.length > 0 && (
-									<div className='mb-5'>
-										{previews.map((preview, index) => (
-											<div key={index}>
-												<img src={preview as string} alt={`Upload preview ${index}`} />
-											</div>
-										))}
+									<div className='flex flex-col items-center justify-center gap-4'>
+										<ArrowUpIcon className='h-5 w-5 fill-current' />
+										{isDragActive ? (
+											<p>Arraste os arquivos aqui...</p>
+										) : (
+											<p>
+												Arraste e solte os arquivos aqui, ou clique para selecionar os
+												arquivos
+											</p>
+										)}
 									</div>
-								)}
+								</div>
 							</div>
+
+							{previews.length > 0 && (
+								<div className='col-span-full mb-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-2'>
+									{previews.map((preview, index) => (
+										<div key={index}>
+											<Image
+												width={100}
+												height={100}
+												className='rounded-md object-cover h-[200px] w-[200px]'
+												src={preview as string}
+												alt={`Upload preview ${index}`}
+											/>
+										</div>
+									))}
+								</div>
+							)}
 						</div>
 					</motion.div>
 				)}
