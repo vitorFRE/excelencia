@@ -4,6 +4,7 @@ import ProjectsHome from './components/home/ProjectsHome'
 import { LuDollarSign, LuHome, LuWallet } from 'react-icons/lu'
 import { Feedbacks } from './components/home/feedbacks'
 import { HeroSection } from './components/home/hero-section'
+import FeatureCard from './components/Card'
 
 const infos = [
 	{
@@ -38,13 +39,15 @@ export default function Home() {
 
 					<div className='pt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8'>
 						{infos.map((i) => (
-							<div key={i.titulo} className='border  rounded-lg py-5 px-4'>
-								{i.icon}
-								<h2 className='font-semibold text-xl dark:text-slate-50 mb-2'>
-									{i.titulo}
-								</h2>
-								<p className='dark:text-slate-400'>{i.descrição}</p>
-							</div>
+							<FeatureCard key={i.titulo}>
+								<div className=''>
+									{i.icon}
+									<h2 className='font-semibold text-xl dark:text-slate-50 mb-2'>
+										{i.titulo}
+									</h2>
+									<p className='dark:text-slate-400'>{i.descrição}</p>
+								</div>
+							</FeatureCard>
 						))}
 					</div>
 				</section>
