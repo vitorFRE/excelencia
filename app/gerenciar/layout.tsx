@@ -3,12 +3,16 @@ import { SidebarNav } from '../components/sidebar-nav'
 
 const sidebarNavItems = [
 	{
-		title: 'Lista de propriedades',
+		title: 'Lista',
 		href: '/gerenciar'
 	},
 	{
 		title: 'Adicionar',
 		href: '/gerenciar/adicionar'
+	},
+	{
+		title: 'Propredades',
+		href: '/gerenciar/propriedades'
 	}
 ]
 

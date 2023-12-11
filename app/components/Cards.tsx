@@ -65,3 +65,21 @@ function FeatureCard({
 }
 
 export default FeatureCard
+
+interface Props {
+	icon: JSX.Element
+	titulo: string
+	descrição: string
+}
+
+export const ServicesCard: React.FC<Props> = ({ icon, titulo, descrição }) => {
+	return (
+		<FeatureCard bgClass='h-full'>
+			<div className=''>
+				{icon}
+				<h2 className='font-semibold text-xl dark:text-slate-50 mb-2'>{titulo}</h2>
+				<p className='dark:text-slate-400'>{descrição}</p>
+			</div>
+		</FeatureCard>
+	)
+}

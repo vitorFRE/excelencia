@@ -1,7 +1,7 @@
 import { Star } from 'lucide-react'
 import Heading from '../Heading'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import FeatureCard from '../Card'
+import FeatureCard from '../Cards'
 
 const infos = [
 	{

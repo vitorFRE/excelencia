@@ -77,14 +77,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
 	return (
 		<div className='col-span-1 group '>
-			<div className='flex flex-col gap-2 w-full min-h-full rounded-xl border border-cBorder '>
-				<div className='aspect-square w-full relative overflow-hidden rounded-t-xl'>
+			<div className='flex flex-col gap-2  rounded-xl border border-cBorder '>
+				<div className='aspect-square w-full h-full relative overflow-hidden rounded-t-xl'>
 					<Image
 						onClick={() => router.push(`/imovel/${id}`)}
 						fill
 						alt='Listing'
 						src={image}
-						className='object-cover cursor-pointer h-full w-full hover:scale-105 transition'
+						className='object-cover cursor-pointer w-full hover:scale-105 transition'
 					/>
 					<div className='absolute top-3 right-3'>
 						<HeartButton propertyId={id} currentUser={currentUser} />

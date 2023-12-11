@@ -25,7 +25,7 @@ export interface Property {
 	images?: PropertyImage[]
 }
 
-interface PropertyImage {
+export interface PropertyImage {
 	id: string
 	property: Property
 	propertyId: string

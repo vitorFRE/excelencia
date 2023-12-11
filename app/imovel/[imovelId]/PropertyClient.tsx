@@ -79,15 +79,18 @@ const PropertyClient: React.FC<PropertyClientProps> = ({
 		console.log(values)
 	}
 
+	const formatted = new Intl.NumberFormat('pt-BR', {
+		style: 'currency',
+		currency: 'BRL'
+	}).format(property.price)
+
 	return (
 		<>
 			<div className=''>
 				<div className='flex justify-between mt-[45px]'>
 					<div>
 						<h1 className='text-4xl font-semibold'>{property.title}</h1>
-						<p className='text-2xl font-medium  mt-1'>
-							<span className=''>R$</span> {property.price}
-						</p>
+						<p className='text-2xl font-medium  mt-1'>{formatted}</p>
 					</div>
 					<Link href={'/'} className='flex gap-1'>
 						<Button>
