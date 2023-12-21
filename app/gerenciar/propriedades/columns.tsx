@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Property, PropertyImage } from '@/app/actions/getPropertys'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export const columns: ColumnDef<Property>[] = [
 	{
@@ -67,7 +68,9 @@ export const columns: ColumnDef<Property>[] = [
 					<DropdownMenuContent align='end'>
 						<DropdownMenuLabel>Ações</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>Editar</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href={`/gerenciar/editar/${row.original.id}`}>Editar</Link>
+						</DropdownMenuItem>
 						<DropdownMenuItem>Excluir</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

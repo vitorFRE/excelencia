@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import { z } from 'zod'
@@ -18,7 +18,7 @@ import { useDropzone } from 'react-dropzone'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { ArrowUpIcon } from 'lucide-react'
+import { ArrowUpIcon, X } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Property } from '@/app/actions/getPropertyById'
@@ -60,11 +60,15 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 	const router = useRouter()
 	const delta = currentStep - previousStep
 
-	const Map = dynamic(() => import('../../components/MapWithMarker'), { ssr: false })
+	const Map = dynamic(() => import('../../../components/MapWithMarker'), {
+		ssr: false
+	})
 
-	//testando
+	const [deletedImageIds, setDeletedImageIds] = useState<string[]>([])
 
-	const [previews, setPreviews] = useState<(string | ArrayBuffer)[]>([])
+	const [previews, setPreviews] = useState<(string | ArrayBuffer)[]>(
+		property.images ? property.images.map((image) => image.imageUrl) : []
+	)
 
 	const onDrop = useCallback((acceptedFiles: File[]) => {
 		acceptedFiles.forEach((file: File) => {
@@ -85,8 +89,6 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 		onDrop
 	})
 
-	//fim
-
 	const setCustomValue = (id: any, value: any) => {
 		setValue(id, value, {
 			shouldValidate: true,
@@ -96,7 +98,9 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 	}
 
 	const [permanentMarkerPosition, setPermanentMarkerPosition] = useState<LatLng | null>(
-		null
+		property.latitude && property.longitude
+			? { lat: property.latitude, lng: property.longitude }
+			: null
 	)
 
 	const handleLatLngSelect = (lat: number, lng: number) => {
@@ -115,12 +119,30 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 		getValues,
 		formState: { errors }
 	} = useForm<Inputs>({
-		resolver: zodResolver(FormDataSchema)
+		resolver: zodResolver(FormDataSchema),
+		defaultValues: {
+			latitude: property.latitude,
+			longitude: property.longitude
+		}
 	})
+
+	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const processForm: SubmitHandler<Inputs> = async (data) => {
 		try {
-			if (acceptedFiles.length === 0) return
+			setIsSubmitting(true)
+			const imageIds = deletedImageIds
+
+			if (imageIds.length > 0) {
+				await axios
+					.post(`/api/imageDelete`, { imageIds })
+					.then(() => {
+						toast.success('Imagens deletas')
+					})
+					.catch(() => {
+						toast.error('Erro ao deletar imagens')
+					})
+			}
 
 			const uploadPromises = acceptedFiles.map(async (file) => {
 				const formData = new FormData()
@@ -146,25 +168,41 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 
 			const propertyData = {
 				...data,
-				images: results.map((image: any) => ({
-					id: image.public_id,
-					url: image.secure_url
-				}))
+				propertyId: property.id,
+				deletedImageIds,
+				images: [
+					...results.map((image: any) => ({
+						id: image.public_id,
+						url: image.secure_url
+					})),
+					...(property.images?.filter(
+						(image: any) => !deletedImageIds.includes(image.id)
+					) || [])
+				]
 			}
 
-			await axios.post('/api/property', propertyData)
+			await axios.patch('/api/property', propertyData)
 
-			toast.success('Propriedade Criada')
+			toast.success('Propriedade Editada')
 			router.refresh()
 			reset()
 		} catch {
-			toast.error('Algo deu ao criar a propriedade!')
+			setIsSubmitting(false)
+			toast.error('Algo deu ao editar a propriedade!')
+		} finally {
+			setIsSubmitting(false)
 		}
 	}
 
 	const roomCounterValue = watch('roomCount', 0)
 	const bedroomCounterValue = watch('bedroomCount', 0)
 	const bathroomCounterValue = watch('bathroomCount', 0)
+
+	useEffect(() => {
+		setValue('roomCount', property.roomCount)
+		setValue('bedroomCount', property.bedroomCount)
+		setValue('bathroomCount', property.bathroomCount)
+	}, [property.roomCount, property.bedroomCount, property.bathroomCount, setValue])
 
 	type FieldName = keyof Inputs
 
@@ -188,6 +226,16 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 			setPreviousStep(currentStep)
 			setCurrentStep((step) => step - 1)
 		}
+	}
+
+	const removeImage = (indexToRemove: number) => {
+		const images = property.images || []
+		const deletedImageId = images[indexToRemove]?.imageId
+		if (deletedImageId) {
+			setDeletedImageIds((prevIds) => [...prevIds, deletedImageId])
+		}
+		const updatedPreviews = previews.filter((_, index) => index !== indexToRemove)
+		setPreviews(updatedPreviews)
 	}
 
 	return (
@@ -260,7 +308,7 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 									<Textarea
 										id='description'
 										placeholder='Descrição da propriedade'
-										{...register('description')}
+										{...register('description', { value: property.description })}
 									/>
 									{errors.description?.message && (
 										<p className='mt-2 text-sm text-red-400'>
@@ -280,7 +328,7 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 										inputMode='numeric'
 										pattern='^\d{5}(-\d{4})?$'
 										className='no-spin'
-										{...register('price', { valueAsNumber: true, value: 0 })}
+										{...register('price', { valueAsNumber: true, value: property.price })}
 									/>
 									{errors.price?.message && (
 										<p className='mt-2 text-sm text-red-400'>{errors.price.message}</p>
@@ -298,7 +346,7 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 										inputMode='numeric'
 										pattern='^\d{5}(-\d{4})?$'
 										className='no-spin'
-										{...register('area', { valueAsNumber: true, value: 0 })}
+										{...register('area', { valueAsNumber: true, value: property.area })}
 									/>
 									{errors.area?.message && (
 										<p className='mt-2 text-sm text-red-400'>{errors.area.message}</p>
@@ -316,7 +364,10 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 										inputMode='numeric'
 										pattern='^\d{5}(-\d{4})?$'
 										className='no-spin'
-										{...register('buildingArea', { valueAsNumber: true, value: 0 })}
+										{...register('buildingArea', {
+											valueAsNumber: true,
+											value: property.buildingArea
+										})}
 									/>
 									{errors.buildingArea?.message && (
 										<p className='mt-2 text-sm text-red-400'>
@@ -350,7 +401,7 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 								/>
 							</div>
 
-							<div className='col-span-full xl:col-span-3'>
+							<div className='col-span-full '>
 								<Label htmlFor='buildingArea'>Imagens</Label>
 								<div
 									className='border border-dashed border-gray-300 p-4 rounded-lg cursor-pointer mt-2'
@@ -371,16 +422,22 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 							</div>
 
 							{previews.length > 0 && (
-								<div className='col-span-full mb-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-2'>
+								<div className='grid col-span-full grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4'>
 									{previews.map((preview, index) => (
-										<div key={index}>
+										<div key={index} className='flex flex-col relative h-64 w-64'>
 											<Image
-												width={100}
-												height={100}
-												className='rounded-md object-cover h-[200px] w-[200px]'
 												src={preview as string}
 												alt={`Upload preview ${index}`}
+												fill
+												className='bg-cover'
+												sizes='256'
 											/>
+											<Button
+												className='absolute top-1 right-2'
+												onClick={() => removeImage(index)}
+												variant={'outline'}>
+												<X size={18} className='text-primary' />
+											</Button>
 										</div>
 									))}
 								</div>
@@ -394,76 +451,91 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 						initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
 						transition={{ duration: 0.3, ease: 'easeInOut' }}>
-						<h2 className='text-base font-semibold leading-7'>Endereço</h2>
-						<p className='mt-1 text-sm leading-6 text-muted-foreground'>
-							Informações sobre a localização da propriedade
-						</p>
+						{isSubmitting ? (
+							<>
+								<p>po</p>
+							</>
+						) : (
+							<>
+								<h2 className='text-base font-semibold leading-7'>Endereço</h2>
+								<p className='mt-1 text-sm leading-6 text-muted-foreground'>
+									Informações sobre a localização da propriedade
+								</p>
 
-						<div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
-							<div className='sm:col-span-3 xl:col-span-2'>
-								<Label htmlFor='city'>Cidade</Label>
-								<div className='mt-2'>
-									<Input
-										type='text'
-										id='city'
-										placeholder='Campo grande'
-										{...register('city')}
-									/>
+								<div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
+									<div className='sm:col-span-3 xl:col-span-2'>
+										<Label htmlFor='city'>Cidade</Label>
+										<div className='mt-2'>
+											<Input
+												type='text'
+												id='city'
+												placeholder='Campo grande'
+												{...register('city', { value: property.city })}
+											/>
 
-									{errors.city?.message && (
-										<p className='mt-2 text-sm text-red-400'>{errors.city.message}</p>
-									)}
+											{errors.city?.message && (
+												<p className='mt-2 text-sm text-red-400'>{errors.city.message}</p>
+											)}
+										</div>
+									</div>
+									<div className='sm:col-span-3 xl:col-span-2'>
+										<Label htmlFor='state'>Estado</Label>
+										<div className='mt-2'>
+											<Input
+												type='text'
+												id='state'
+												placeholder='MS'
+												{...register('state', { value: property.state })}
+											/>
+
+											{errors.state?.message && (
+												<p className='mt-2 text-sm text-red-400'>
+													{errors.state.message}
+												</p>
+											)}
+										</div>
+									</div>
+									<div className='sm:col-span-3 xl:col-span-2'>
+										<Label htmlFor='locationValue'>Informações adicionais</Label>
+										<div className='mt-2'>
+											<Input
+												type='text'
+												id='locationValue'
+												placeholder='Proximo ao parque...'
+												{...register('locationValue', { value: property.locationValue })}
+											/>
+
+											{errors.locationValue?.message && (
+												<p className='mt-2 text-sm text-red-400'>
+													{errors.locationValue.message}
+												</p>
+											)}
+										</div>
+									</div>
+
+									<div className='col-span-full'>
+										<h1>Selecione um local no mapa</h1>
+										<Map
+											onLatLngSelect={handleLatLngSelect}
+											initialMarkerPosition={permanentMarkerPosition}
+										/>
+										{permanentMarkerPosition && (
+											<p>
+												Local selecionado: Latitude {permanentMarkerPosition.lat},
+												Longitude {permanentMarkerPosition.lng}
+											</p>
+										)}
+									</div>
 								</div>
-							</div>
-							<div className='sm:col-span-3 xl:col-span-2'>
-								<Label htmlFor='state'>Estado</Label>
-								<div className='mt-2'>
-									<Input type='text' id='state' placeholder='MS' {...register('state')} />
-
-									{errors.state?.message && (
-										<p className='mt-2 text-sm text-red-400'>{errors.state.message}</p>
-									)}
-								</div>
-							</div>
-							<div className='sm:col-span-3 xl:col-span-2'>
-								<Label htmlFor='locationValue'>Informações adicionais</Label>
-								<div className='mt-2'>
-									<Input
-										type='text'
-										id='locationValue'
-										placeholder='Proximo ao parque...'
-										{...register('locationValue')}
-									/>
-
-									{errors.locationValue?.message && (
-										<p className='mt-2 text-sm text-red-400'>
-											{errors.locationValue.message}
-										</p>
-									)}
-								</div>
-							</div>
-
-							<div className='col-span-full'>
-								<h1>Selecione um local no mapa</h1>
-								<Map
-									onLatLngSelect={handleLatLngSelect}
-									initialMarkerPosition={permanentMarkerPosition}
-								/>
-								{permanentMarkerPosition && (
-									<p>
-										Local selecionado: Latitude {permanentMarkerPosition.lat}, Longitude{' '}
-										{permanentMarkerPosition.lng}
-									</p>
-								)}
-							</div>
-						</div>
+							</>
+						)}
 					</motion.div>
 				)}
 
 				{currentStep === 2 && (
 					<>
-						<h2 className='text-base font-semibold leading-7'>Complete</h2>
-						<p className='mt-1 text-sm leading-6'>Thank you for your submission.</p>
+						<h2 className='text-base font-semibold leading-7'>Completo</h2>
+						<p className='mt-1 text-sm leading-6'>A casa foi editada.</p>
 					</>
 				)}
 			</form>
@@ -478,8 +550,8 @@ export const EditarClient: React.FC<EditarCLientPropsIParams> = ({ property }) =
 					<Button
 						type='button'
 						onClick={next}
-						disabled={currentStep === steps.length - 1}>
-						Proximo
+						disabled={currentStep === steps.length - 1 || isSubmitting}>
+						{currentStep === steps.length - 2 ? 'Editar' : 'Próximo'}
 					</Button>
 				</div>
 			</div>

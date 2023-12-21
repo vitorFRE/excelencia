@@ -2,11 +2,16 @@ import getCurrentUser from '@/app/actions/getCurrentUser'
 import { redirect } from 'next/navigation'
 import { EditarClient } from './EditarClient'
 import getPropertyById from '@/app/actions/getPropertyById'
-import { Property } from '@/app/actions/getPropertys'
 
-const Editar = async () => {
+interface IParams {
+	imovelId?: string
+}
+
+const Editar = async ({ params }: { params: IParams }) => {
+	const { imovelId } = params
+
 	const currentUser = await getCurrentUser()
-	const propertyResult: any = await getPropertyById('clpmy5syi0007ulncvbsswnww')
+	const propertyResult: any = imovelId ? await getPropertyById(imovelId) : null
 
 	if (!currentUser) {
 		redirect('/')

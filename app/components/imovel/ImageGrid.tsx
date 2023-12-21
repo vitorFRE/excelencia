@@ -47,6 +47,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
 					className=' w-full h-[500px] overflow-hidden rounded-xl relative cursor-pointer'>
 					<Image
 						fill
+						sizes='500'
 						placeholder='blur'
 						blurDataURL={placeholderBlurhash}
 						onLoad={() => setIsLoading(false)}
