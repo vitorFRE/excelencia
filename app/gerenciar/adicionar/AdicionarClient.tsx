@@ -114,6 +114,7 @@ export default function AdicionarClient() {
 	})
 
 	const processForm: SubmitHandler<Inputs> = async (data) => {
+		let results = []
 		try {
 			if (acceptedFiles.length === 0) return
 
@@ -137,7 +138,7 @@ export default function AdicionarClient() {
 				return result
 			})
 
-			const results = await Promise.all(uploadPromises)
+			results = await Promise.all(uploadPromises)
 
 			const propertyData = {
 				...data,
@@ -152,7 +153,15 @@ export default function AdicionarClient() {
 			toast.success('Propriedade Criada')
 			router.refresh()
 			reset()
-		} catch {
+		} catch (error) {
+			if (results.length > 0) {
+				const publicIdsToDelete = results.map((image) => image.public_id)
+				const imageIds = publicIdsToDelete
+				await axios
+					.post(`/api/imageDelete`, { imageIds })
+					.then(() => {})
+					.catch(() => {})
+			}
 			toast.error('Algo deu ao criar a propriedade!')
 		}
 	}

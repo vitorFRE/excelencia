@@ -42,6 +42,10 @@ export const columns: ColumnDef<Property>[] = [
 		header: 'Nome'
 	},
 	{
+		accessorKey: 'city',
+		header: 'Cidade'
+	},
+	{
 		accessorKey: 'price',
 		header: 'Preço',
 		cell: ({ row }) => {
@@ -56,6 +60,7 @@ export const columns: ColumnDef<Property>[] = [
 	},
 	{
 		id: 'actions',
+		header: 'Ações',
 		cell: ({ row }) => {
 			return (
 				<DropdownMenu>
