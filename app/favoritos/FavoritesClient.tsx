@@ -1,8 +1,8 @@
 import { FullFavoriteInfo, SafeUser } from '@/app/types'
 
-import Heading from '@/app/components/Heading'
-import Container from '@/app/components/Container'
-import PropertyCard from '../components/property/PropertyCard'
+import Heading from '@/components/Heading'
+import Container from '@/components/Container'
+import PropertyCard from '../../components/property/PropertyCard'
 
 interface FavoritesClientProps {
 	listings: FullFavoriteInfo[]

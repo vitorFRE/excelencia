@@ -1,7 +1,7 @@
 import getPropertyById from '@/app/actions/getPropertyById'
-import EmptyState from '@/app/components/EmptyState'
+import EmptyState from '@/components/EmptyState'
 import PropertyClient from './PropertyClient'
-import Container from '@/app/components/Container'
+import Container from '@/components/Container'
 import getCurrentUser from '@/app/actions/getCurrentUser'
 import getPropertys from '@/app/actions/getPropertys'
 

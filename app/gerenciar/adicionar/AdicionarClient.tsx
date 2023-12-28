@@ -11,9 +11,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import useDisableScroll from '@/app/hooks/useDisableScroll'
 import { Textarea } from '@/components/ui/textarea'
-import CounterT from '@/app/components/inputs/CounterTest'
+import CounterT from '@/components/inputs/CounterTest'
 import dynamic from 'next/dynamic'
-import { LatLng } from '@/app/components/MapWithMarker'
+import { LatLng } from '@/components/MapWithMarker'
 import { useDropzone } from 'react-dropzone'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -55,7 +55,7 @@ export default function AdicionarClient() {
 	const router = useRouter()
 	const delta = currentStep - previousStep
 
-	const Map = dynamic(() => import('../../components/MapWithMarker'), { ssr: false })
+	const Map = dynamic(() => import('../../../components/MapWithMarker'), { ssr: false })
 
 	//testando
 

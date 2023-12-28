@@ -1,5 +1,5 @@
 'use client'
-import ImageGrid from '@/app/components/imovel/ImageGrid'
+import ImageGrid from '@/components/imovel/ImageGrid'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 import { AiOutlineWhatsApp } from 'react-icons/ai'
@@ -8,11 +8,11 @@ import { Property, PropertyImage } from '@prisma/client'
 import { Property as PropertyArraw } from '../../actions/getPropertys'
 import { LuBath, LuBedDouble, LuBuilding, LuLamp, LuArrowRight } from 'react-icons/lu'
 /* import MapWithLocation from '@/app/components/MapWithLocation' */
-import RecentPropertiesCard from '@/app/components/imovel/RecentPropertiesCard'
+import RecentPropertiesCard from '@/components/imovel/RecentPropertiesCard'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import dynamic from 'next/dynamic'
-import Heading from '@/app/components/Heading'
+import Heading from '@/components/Heading'
 import * as z from 'zod'
 import { Button } from '@/components/ui/button'
 import {
@@ -28,7 +28,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SendHorizonal } from 'lucide-react'
 
-const MapWithLocation = dynamic(() => import('@/app/components/MapWithLocation'), {
+const MapWithLocation = dynamic(() => import('@/components/MapWithLocation'), {
 	ssr: false
 })
 

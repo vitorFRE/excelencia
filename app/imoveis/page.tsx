@@ -1,6 +1,6 @@
 import getCurrentUser from '../actions/getCurrentUser'
 import getPropertys, { Property } from '../actions/getPropertys'
-import EmptyState from '../components/EmptyState'
+import EmptyState from '../../components/EmptyState'
 import PropertiesClient from './PropertiesClient'
 
 const PropertiesPage = async () => {

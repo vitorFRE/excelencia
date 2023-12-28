@@ -1,6 +1,6 @@
 import getCurrentUser from '../actions/getCurrentUser'
 
-import EmptyState from '../components/EmptyState'
+import EmptyState from '../../components/EmptyState'
 
 import { redirect } from 'next/navigation'
 import { GerenciarClient } from './GerenciarClient'

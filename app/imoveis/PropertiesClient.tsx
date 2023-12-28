@@ -1,7 +1,7 @@
-import EmptyState from '../components/EmptyState'
-import Container from '../components/Container'
-import Heading from '../components/Heading'
-import PropertyCard from '../components/property/PropertyCard'
+import EmptyState from '../../components/EmptyState'
+import Container from '../../components/Container'
+import Heading from '../../components/Heading'
+import PropertyCard from '../../components/property/PropertyCard'
 import { Property } from '../actions/getPropertys'
 import { SafeUser } from '../types'
 

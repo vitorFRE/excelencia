@@ -1,6 +1,6 @@
 import getCurrentUser from '../actions/getCurrentUser'
 import getFavoriteListings from '../actions/getFavoriteListings'
-import EmptyState from '../components/EmptyState'
+import EmptyState from '../../components/EmptyState'
 import FavoritesClient from './FavoritesClient'
 import { redirect } from 'next/navigation'
 

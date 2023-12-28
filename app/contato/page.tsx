@@ -1,7 +1,7 @@
 'use client'
 
-import Container from '../components/Container'
-import Heading from '../components/Heading'
+import Container from '../../components/Container'
+import Heading from '../../components/Heading'
 import { LuMapPin, LuMail, LuPhone } from 'react-icons/lu'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'

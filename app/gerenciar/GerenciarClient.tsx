@@ -1,5 +1,5 @@
 import { Property } from '../actions/getPropertys'
-import PropertyCard from '../components/property/PropertyCard'
+import PropertyCard from '../../components/property/PropertyCard'
 import { SafeUser } from '../types'
 
 interface GerenciarProps {

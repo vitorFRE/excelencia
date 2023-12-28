@@ -1,10 +1,10 @@
-import Container from './components/Container'
-import Heading from './components/Heading'
-import ProjectsHome from './components/home/ProjectsHome'
+import Container from '../components/Container'
+import Heading from '../components/Heading'
+import ProjectsHome from '../components/home/ProjectsHome'
 import { LuDollarSign, LuHome, LuWallet } from 'react-icons/lu'
-import { Feedbacks } from './components/home/feedbacks'
-import { HeroSection } from './components/home/hero-section'
-import FeatureCard, { ServicesCard } from './components/Cards'
+import { Feedbacks } from '../components/home/feedbacks'
+import { HeroSection } from '../components/home/hero-section'
+import FeatureCard, { ServicesCard } from '../components/Cards'
 
 const infos = [
 	{
