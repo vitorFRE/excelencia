@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
+import getCurrentUser from '@/app/actions/getCurrentUser'
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -8,6 +9,15 @@ cloudinary.config({
 })
 
 export async function POST(request: Request) {
+	const currentUser = await getCurrentUser()
+
+	if (!currentUser) {
+		return NextResponse.error()
+	}
+
+	if (currentUser.role !== 'ADMIN') {
+		return NextResponse.error()
+	}
 	try {
 		const body = await request.json()
 		const { imageIds } = body
@@ -31,15 +41,3 @@ async function deleteImage(publicIds: any) {
 		})
 	})
 }
-
-/* axios
-			.post('/api/imageDelete', { imagesId })
-			.then(() => {
-				toast.success('Imagens excluidas')
-			})
-			.catch(() => {
-				toast.error('Algo de errado não esta certo')
-			})
-			.finally(() => {
-				setIsLoading(false)
-			}) */

@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 
 import { v2 as cloudinary } from 'cloudinary'
+import getCurrentUser from '@/app/actions/getCurrentUser'
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,6 +10,16 @@ cloudinary.config({
 })
 
 export async function POST(request: NextRequest) {
+	const currentUser = await getCurrentUser()
+
+	if (!currentUser) {
+		return NextResponse.error()
+	}
+
+	if (currentUser.role !== 'ADMIN') {
+		return NextResponse.error()
+	}
+
 	const body = await request.formData()
 	const items = body.getAll('image') as File[]
 	const data = await Promise.all(items.map(async (item: File) => await Uploader(item)))
