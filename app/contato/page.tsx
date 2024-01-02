@@ -20,6 +20,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SendHorizonal } from 'lucide-react'
+import { ServicesCard } from '@/components/Cards'
 
 const formaSchema = z.object({
 	username: z.string().min(2, {
@@ -119,7 +120,7 @@ const ContactPage = () => {
 				<Form {...form}>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}
-						className='space-y-8 mt-6 sm:mt-0 border rounded-md py-5 px-4 dark:bg-[#191A1E]'>
+						className='space-y-8 mt-6 sm:mt-0 border rounded-md py-5 px-4 dark:bg-[#101010]'>
 						<FormField
 							control={form.control}
 							name='username'
@@ -193,15 +194,12 @@ const ContactPage = () => {
 
 				<div className='pt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8'>
 					{infos.map((i) => (
-						<div
+						<ServicesCard
 							key={i.titulo}
-							className='dark:bg-[#191A1E] border  rounded-lg py-5 px-4'>
-							{i.icon}
-							<h2 className='font-semibold text-xl dark:text-slate-50 mb-2'>
-								{i.titulo}
-							</h2>
-							<p className='dark:text-slate-400'>{i.descrição}</p>
-						</div>
+							descrição={i.descrição}
+							icon={i.icon}
+							titulo={i.titulo}
+						/>
 					))}
 				</div>
 			</section>
