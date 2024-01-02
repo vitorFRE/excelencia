@@ -29,7 +29,7 @@ const infos = [
 
 export default function Home() {
 	return (
-		<main className=''>
+		<main className='dark:bg-bgblack'>
 			<HeroSection />
 			<ProjectsHome />
 			<Container>

@@ -17,6 +17,8 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				bgblack: '#060606',
+				//shadcn
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

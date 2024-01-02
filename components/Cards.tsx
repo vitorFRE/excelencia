@@ -54,7 +54,7 @@ function FeatureCard({
 			}>
 			<div
 				className={clsx(
-					'group relative w-full overflow-hidden rounded-3xl border bg-gradient-to-b from-neutral-50/90 to-neutral-100/90 transition duration-300 dark:from-slate-950/90 dark:to-slate-900/90',
+					'group relative w-full overflow-hidden rounded-3xl border bg-gradient-to-b from-neutral-50/90 to-neutral-100/90 transition duration-300 dark:from-[#080808] dark:to-[#090909]',
 					'md:hover:border-transparent',
 					bgClass
 				)}>
@@ -77,8 +77,8 @@ export const ServicesCard: React.FC<Props> = ({ icon, titulo, descrição }) => 
 		<FeatureCard bgClass='h-full'>
 			<div className=''>
 				{icon}
-				<h2 className='font-semibold text-xl dark:text-slate-50 mb-2'>{titulo}</h2>
-				<p className='dark:text-slate-400'>{descrição}</p>
+				<h2 className='font-semibold text-xl dark:text-white mb-2'>{titulo}</h2>
+				<p className='dark:text-gray-400'>{descrição}</p>
 			</div>
 		</FeatureCard>
 	)

@@ -20,10 +20,14 @@ const Navitems = () => {
 						key={i.label}
 						className={`text-sm ${
 							pathname === i.href
-								? 'font-bold dark:text-slate-200'
-								: 'dark:text-slate-400 font-semibold'
+								? 'font-bold dark:text-white'
+								: 'dark:text-gray-400 font-semibold'
 						} `}>
-						<Button variant={pathname === i.href ? 'outline' : 'ghost'}>{i.label}</Button>
+						<Button
+							variant={pathname === i.href ? 'outline' : 'ghost'}
+							className={pathname === i.href ? 'bg-transparent' : ''}>
+							{i.label}
+						</Button>
 					</Link>
 				)
 			})}

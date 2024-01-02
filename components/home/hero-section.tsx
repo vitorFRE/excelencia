@@ -8,11 +8,11 @@ export const HeroSection = () => {
 	return (
 		<section className='h-[350px] relative bg-center bg-cover bg-hero-bg'>
 			<div className='absolute inset-0 bg-black opacity-80'></div>
-			<div className='max-w-[670px] text-center text-white flex flex-col gap-4 justify-center items-center h-full mx-auto relative z-10'>
-				<h1 className='text-4xl font-bold text-slate-50'>
+			<div className='max-w-[670px] text-center flex flex-col gap-4 justify-center items-center h-full mx-auto relative z-10'>
+				<h1 className='text-4xl font-bold text-white'>
 					Encontre Seu Lugar, em um Único Lugar
 				</h1>
-				<p className='text-lg text-slate-200 max-w-md'>
+				<p className='text-lg text-gray-300 max-w-md'>
 					Descubra as Melhores Opções de Casas, Apartamentos e Terrenos com a Nossa Ajuda
 				</p>
 				<Button

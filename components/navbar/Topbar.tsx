@@ -7,7 +7,7 @@ interface TopbarProps {
 
 const Topbar: React.FC<TopbarProps> = ({ phoneNumber }) => {
 	return (
-		<div className='border-b-[1px] pb-4 md:pb-4'>
+		<div className='dark:bg-bgblack border-b-[1px] pb-4 md:pb-4'>
 			<Container>
 				<div className='flex pt-4 flex-row justify-between items-center'>
 					<div className='flex gap-2 items-center'>

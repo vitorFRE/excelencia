@@ -78,7 +78,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 	return (
 		<div className='col-span-1 group '>
 			<div className='flex flex-col gap-2  rounded-xl border border-cBorder '>
-				<div className='aspect-square w-full h-full relative overflow-hidden rounded-t-xl'>
+				<div className='aspect-square w-full h-[300px] relative overflow-hidden rounded-t-xl'>
 					<Image
 						onClick={() => router.push(`/imovel/${id}`)}
 						fill
@@ -91,12 +91,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 					</div>
 				</div>
 				<section className='flex flex-col gap-2 px-4 pt-4 pb-7'>
-					<h3 className='dark:text-slate-50 font-bold text-lg'>{title}</h3>
-					<span className='text-base font-medium dark:text-slate-500 flex items-center'>
+					<h3 className='dark:text-white font-bold text-lg'>{title}</h3>
+					<span className='text-base font-medium dark:text-gray-300 flex items-center'>
 						<LuMapPin size={18} />
 						{city} - {state}
 					</span>
-					<p className='text-sm font-medium line-clamp-3 text-slate-400'>{description}</p>
+					<p className='text-sm font-medium line-clamp-3 text-gray-400'>{description}</p>
 				</section>
 				{deleteButton ? (
 					<AlertDialog>

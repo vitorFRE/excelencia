@@ -56,8 +56,8 @@ export const Feedbacks = () => {
 							<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
 							<Star size={24} fill='rgb(37 99 235)' className='text-blue-600' />
 						</div>
-						<h3 className='dark:text-slate-50 font-bold text-lg mb-2'>{i.title}</h3>
-						<p className='text-sm font-medium line-clamp-3 text-slate-400 mb-8'>
+						<h3 className='dark:text-white font-bold text-lg mb-2'>{i.title}</h3>
+						<p className='text-sm font-medium line-clamp-3 dark:text-gray-400 mb-8'>
 							{i.testimonial}
 						</p>
 						<div className='flex gap-3 items-center'>
@@ -66,10 +66,12 @@ export const Feedbacks = () => {
 								<AvatarFallback>US</AvatarFallback>
 							</Avatar>
 							<div className='flex flex-col'>
-								<h4 className='font-medium text-slate-600 dark:text-slate-200'>
+								<h4 className='font-medium text-slate-600 dark:text-white'>
 									{i.author.name}
 								</h4>
-								<span className='text-slate-500 text-xs'>{i.author.location}</span>
+								<span className='text-slate-500 dark:text-gray-500 text-xs'>
+									{i.author.location}
+								</span>
 							</div>
 						</div>
 					</FeatureCard>
