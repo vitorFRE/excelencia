@@ -9,7 +9,7 @@ interface GerenciarProps {
 
 export const GerenciarClient: React.FC<GerenciarProps> = ({ listings, currentUser }) => {
 	return (
-		<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-8'>
+		<div className='grid min-h-screen grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-8'>
 			{listings.map((property) => (
 				<PropertyCard
 					image={property.images && property.images[0] ? property.images[0].imageUrl : ''}

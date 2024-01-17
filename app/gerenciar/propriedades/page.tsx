@@ -17,7 +17,7 @@ export default async function DemoPage() {
 	}
 
 	return (
-		<div className=''>
+		<div className='min-h-screen'>
 			<DataTable columns={columns} data={listings} />
 		</div>
 	)
